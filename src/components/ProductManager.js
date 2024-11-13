@@ -13,7 +13,7 @@ function ProductManager() {
 
   const fetchProducts = async () => {
     try {
-      const response = await fetch('http://localhost:5000/products');
+      const response = await fetch('http://localhost:4000/products');
       const data = await response.json();
       setProducts(data);
     } catch (error) {
@@ -25,14 +25,14 @@ function ProductManager() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (isEditing) {
-      await fetch(`http://localhost:5000/products/${currentProduct._id}`, {
+      await fetch(`http://localhost:4000/products/${currentProduct._id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(currentProduct),
       });
       setIsEditing(false);
     } else {
-      await fetch('http://localhost:5000/products', {
+      await fetch('http://localhost:4000/products', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(currentProduct),
@@ -45,7 +45,7 @@ function ProductManager() {
   // Handle delete operation
   const handleDelete = async (id) => {
     try {
-      await fetch(`http://localhost:5000/products/${id}`, { method: 'DELETE' });
+      await fetch(`http://localhost:4000/products/${id}`, { method: 'DELETE' });
       setProducts(products.filter((product) => product._id !== id));
     } catch (error) {
       console.error('Error deleting product:', error);
